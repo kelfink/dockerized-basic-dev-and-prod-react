@@ -68,3 +68,21 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+# Docker
+
+With docker and docker-compose installed, you can run it all inside docker 
+### `docker build -f Dockerfile.dev .`
+outputs a hash ... use it (or the first 10 or so chars of it) for running the docker image, as in...
+### `docker run -it 335074bf`
+or run an alternative command such as the tess inside the container.
+### `docker run -it 335074bf npm run test`
+
+# Docker-compose
+Use docker-compose to simplify starting up the docker file, since it can specify the volumes for development-mode copying, plus the port.  Note the use of two mappings in the docker-compose.yml file, so that the node_modules are ignored but everything else is copied.  We want that because we want to build the node_modules *inside* the app, and not to copy them from outside.  The current setup should allow reloading of a page after editing relevant files, as the files will be seen to have changed.
+
+### `docker-compose up`  
+or 
+### `docker-compose up --build`
+ to start up the services
