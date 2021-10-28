@@ -1,0 +1,25 @@
+version: "3"
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      # map the container's node_modules dir to itself.  Overrides the next value
+      - /app/node_modules
+      # map all but /app/node_modules to the container's /app dir
+      - .:/app
+
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      # map the container's node_modules dir to itself.  Overrides the next value
+      - /app/node_modules
+      # map all but /app/node_modules to the container's /app dir
+      - .:/app
+    command: ["npm","run","test"]
+    
