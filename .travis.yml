@@ -1,0 +1,10 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t kelfink/dockerized-basic-dev-and-prod-react -f Dockerfile.dev .
+
+script:
+  - docker run -e CI=true kelfink/dockerized-basic-dev-and-prod-react npm run test -- --coverage
